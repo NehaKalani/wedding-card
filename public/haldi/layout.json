@@ -1,0 +1,162 @@
+{
+  "painting": {
+    "w": 1024,
+    "h": 1536
+  },
+  "leftX": 232,
+  "topCut": 300,
+  "band": {
+    "y0": 326,
+    "y1": 376,
+    "w": 232
+  },
+  "top": {
+    "x": 0,
+    "y": 0,
+    "w": 1024,
+    "h": 326
+  },
+  "bottom": {
+    "x": 0,
+    "y": 300,
+    "w": 1024,
+    "h": 1236
+  },
+  "lettering": {
+    "x": 275,
+    "y": 145,
+    "w": 599,
+    "h": 405
+  },
+  "sway": [
+    {
+      "name": "strand-pillar",
+      "x": 60,
+      "y": 166,
+      "w": 68,
+      "h": 589,
+      "origin": [
+        96,
+        164
+      ],
+      "split": true
+    },
+    {
+      "name": "strand-pair",
+      "x": 161,
+      "y": 245,
+      "w": 108,
+      "h": 362,
+      "origin": [
+        222,
+        243
+      ],
+      "split": true
+    },
+    {
+      "name": "strand-sky",
+      "x": 267,
+      "y": 2,
+      "w": 70,
+      "h": 283,
+      "origin": [
+        302,
+        0
+      ]
+    },
+    {
+      "name": "vine-left",
+      "x": 432,
+      "y": 0,
+      "w": 124,
+      "h": 106,
+      "origin": [
+        430,
+        12
+      ]
+    },
+    {
+      "name": "vine-right",
+      "x": 778,
+      "y": 2,
+      "w": 131,
+      "h": 78,
+      "origin": [
+        856,
+        0
+      ]
+    }
+  ],
+  "petals": [
+    {
+      "src": "petal-1.webp",
+      "w": 28,
+      "h": 20
+    },
+    {
+      "src": "petal-gold-1.webp",
+      "w": 28,
+      "h": 20
+    },
+    {
+      "src": "petal-2.webp",
+      "w": 21,
+      "h": 28
+    },
+    {
+      "src": "petal-gold-2.webp",
+      "w": 21,
+      "h": 28
+    },
+    {
+      "src": "petal-3.webp",
+      "w": 22,
+      "h": 29
+    },
+    {
+      "src": "petal-gold-3.webp",
+      "w": 22,
+      "h": 29
+    },
+    {
+      "src": "petal-4.webp",
+      "w": 31,
+      "h": 37
+    },
+    {
+      "src": "petal-gold-4.webp",
+      "w": 31,
+      "h": 37
+    },
+    {
+      "src": "petal-5.webp",
+      "w": 24,
+      "h": 21
+    },
+    {
+      "src": "petal-gold-5.webp",
+      "w": 24,
+      "h": 21
+    },
+    {
+      "src": "petal-6.webp",
+      "w": 19,
+      "h": 18
+    },
+    {
+      "src": "petal-gold-6.webp",
+      "w": 19,
+      "h": 18
+    },
+    {
+      "src": "petal-7.webp",
+      "w": 17,
+      "h": 17
+    },
+    {
+      "src": "petal-gold-7.webp",
+      "w": 17,
+      "h": 17
+    }
+  ]
+}

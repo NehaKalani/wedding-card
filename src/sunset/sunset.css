@@ -1,0 +1,376 @@
+@font-face {
+  font-family: Shivaraja;
+  src: url("/fonts/shivaraja/Shivaraja.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.sunset {
+  --golden: 0;
+  --unroll: 0;
+  --sky: 0;
+  --lights: 0;
+  --ground: 0;
+  --veil: 0;
+  --rite: 0;
+  position: relative;
+  height: calc(var(--app-h) * 4.2);
+  background: #140e12;
+}
+
+.sunset__stage {
+  position: sticky;
+  top: 0;
+  height: var(--app-h);
+  overflow: hidden;
+  background: color-mix(in srgb, #14182e calc(var(--sky) * 100%), #e7a15c);
+}
+
+.sunset__art {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 941px;
+  height: 1672px;
+  transform-origin: 0 0;
+  background: #ce9a70;
+}
+
+.sunset__sky,
+.sunset__city,
+.sunset__wall,
+.sunset__floor,
+.sunset__pot,
+.sunset__lantern,
+.sunset__sofa,
+.sunset__musicians,
+.sunset__carpet,
+.sunset__day,
+.sunset__dusk,
+.sunset__banner,
+.sunset__roll,
+.sunset__copy {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.sunset__sky {
+  inset: 0;
+  width: 941px;
+  height: 1672px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.sunset__sky--day {
+  opacity: calc(1 - var(--sky));
+}
+
+.sunset__sky--night {
+  opacity: var(--sky);
+}
+
+.sunset__city--day,
+.sunset__lantern--off {
+  opacity: calc(1 - var(--lights));
+}
+
+.sunset__city--night,
+.sunset__lantern--on {
+  opacity: var(--lights);
+}
+
+.sunset__sofa--day,
+.sunset__musicians--day,
+.sunset__carpet--day {
+  opacity: calc(1 - var(--ground));
+}
+
+.sunset__sofa--night,
+.sunset__musicians--night,
+.sunset__carpet--night {
+  opacity: var(--ground);
+}
+
+/* Full skyline, sharp. Only the empty sky above the domes feathers into the sky layer. */
+.sunset__city {
+  left: -50px;
+  top: 470px;
+  z-index: 2;
+  width: 1040px;
+  height: auto;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%);
+}
+
+.sunset__city img {
+  width: 1040px;
+  height: auto;
+}
+
+.sunset__wall {
+  left: -50px;
+  top: 900px;
+  z-index: 3;
+  width: 1040px;
+  height: auto;
+}
+
+.sunset__floor {
+  left: 0;
+  top: 1185px;
+  z-index: 3;
+  width: 941px;
+  height: 487px;
+  background: #ce9a70;
+}
+
+.sunset__lantern {
+  left: 36px;
+  top: 1010px;
+  z-index: 4;
+  width: 96px;
+  height: auto;
+}
+
+/* Foreground cluster, in front of the sofa, on the left edge. */
+.sunset__pot {
+  z-index: 8;
+  height: auto;
+}
+
+.sunset__pot--small {
+  left: var(--edge, 0px);
+  top: 1364px;
+  width: 102px;
+}
+
+.sunset__pot--big {
+  left: calc(var(--edge, 0px) + 72px);
+  top: 1416px;
+  width: 164px;
+}
+
+.sunset__pot--banana {
+  left: var(--edge, 0px);
+  top: 1504px;
+  width: 112px;
+}
+
+.sunset__pot--bowl {
+  left: calc(var(--edge, 0px) + 78px);
+  top: 1604px;
+  width: 116px;
+}
+
+.sunset__pot--right {
+  left: calc(var(--edge, 0px) + 148px);
+  top: 1492px;
+  width: 92px;
+}
+
+.sunset__carpet {
+  left: 160px;
+  top: 1446px;
+  z-index: 5;
+  width: 640px;
+  height: auto;
+}
+
+/* The day rug plate has a stray sofa scrap in the top-left corner. */
+.sunset__carpet--day {
+  clip-path: polygon(11% 0, 100% 0, 100% 100%, 0 100%, 0 16%, 11% 16%);
+}
+
+.sunset__sofa {
+  left: 20px;
+  top: 1088px;
+  z-index: 6;
+  width: 900px;
+  overflow: hidden;
+}
+
+.sunset__sofa--day {
+  left: 30px;
+  top: 1138px;
+  width: 880px;
+  height: 316px;
+}
+
+.sunset__sofa--night {
+  height: 366px;
+}
+
+.sunset__sofa img {
+  width: 900px;
+  height: auto;
+}
+
+.sunset__sofa--day img {
+  width: 880px;
+}
+
+.sunset__musicians {
+  left: 160px;
+  top: 998px;
+  z-index: 7;
+  width: 620px;
+  height: auto;
+}
+
+/* Blue hour: dark overhead, last warmth on the horizon, then it lifts. */
+.sunset__dusk {
+  left: 0;
+  top: 0;
+  z-index: 9;
+  width: 941px;
+  height: 1672px;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 18, 48, 0.62) 0%,
+    rgba(48, 28, 72, 0.34) 28%,
+    rgba(168, 72, 48, 0.28) 58%,
+    rgba(255, 150, 70, 0.12) 78%,
+    rgba(255, 140, 60, 0) 100%
+  );
+  opacity: var(--veil);
+}
+
+/* Earlier light, fading as the hour turns gold. */
+.sunset__day {
+  left: 0;
+  top: 0;
+  z-index: 9;
+  width: 941px;
+  height: 1100px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 244, 224, 0.72) 0%,
+    rgba(255, 214, 168, 0.38) 38%,
+    rgba(255, 170, 100, 0) 78%
+  );
+  opacity: calc(1 - var(--golden));
+}
+
+.sunset__banner {
+  left: 96px;
+  top: var(--hang, 0px);
+  z-index: 10;
+  width: 590px;
+  height: auto;
+  clip-path: inset(0 0 calc((1 - var(--unroll)) * 100%) 0);
+}
+
+/* Same cloth as the banner, so the invitation unrolls with it. */
+.sunset__copy {
+  left: 96px;
+  top: var(--hang, 0px);
+  z-index: 12;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 590px;
+  height: calc(590px * 483 / 290);
+  padding: 20% 13.5% 24%;
+  clip-path: inset(0 0 calc((1 - var(--unroll)) * 100%) 0);
+  color: #5c2618;
+  text-align: center;
+}
+
+.sunset__rite {
+  grid-area: 1 / 1;
+  width: 100%;
+  margin: 0;
+}
+
+.sunset__rite p {
+  margin: 0;
+  font-family: "Instrument Serif", Palatino, Georgia, serif;
+  font-size: 34px;
+  line-height: 1.35;
+}
+
+.sunset__rite .sunset__rite-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  margin: 0 0 12px;
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 46px;
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+  font-synthesis: none;
+}
+
+.sunset__rite--day .sunset__rite-name {
+  font-family: Shivaraja, "Cormorant Garamond", Palatino, Georgia, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 54px;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.sunset__rite--night .sunset__rite-name {
+  font-family: Amita, "Kohinoor Devanagari", "Noto Serif Devanagari", serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+/* One invitation leaves before the next arrives, so the lines never cross. */
+.sunset__rite--day {
+  opacity: clamp(0, calc(1 - var(--rite) * 2), 1);
+}
+
+.sunset__rite--night {
+  opacity: clamp(0, calc(var(--rite) * 2 - 1), 1);
+}
+
+/* Same width as the open banner. Flattened so the closed roll is thinner. */
+.sunset__roll {
+  left: 96px;
+  top: calc(var(--hang, 0px) - 52px);
+  z-index: 11;
+  width: 590px;
+  height: auto;
+  transform: scaleY(0.62);
+  transform-origin: 50% 46%;
+  opacity: calc(1 - min(1, var(--unroll) * 2.4));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sunset {
+    --golden: 1;
+    --unroll: 1;
+    --sky: 0;
+    --lights: 0;
+    --ground: 0;
+    --veil: 0;
+    --rite: 0;
+    height: var(--app-h);
+  }
+
+  .sunset__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 36px;
+  }
+
+  .sunset__rite--day,
+  .sunset__rite--night {
+    grid-area: auto;
+    opacity: 1;
+  }
+
+  .sunset__stage {
+    position: relative;
+  }
+}

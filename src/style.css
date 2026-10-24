@@ -1,0 +1,536 @@
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/instrument-serif/InstrumentSerif-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/instrument-serif/InstrumentSerif-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --app-h: 100svh;
+  --ivory: #fbf7ef;
+  --ivory-deep: #f1e9da;
+  --leaf: #4b6a2c;
+  --leaf-soft: rgba(75, 106, 44, 0.45);
+  /* Same inset on every side. The names sit in the middle of what's left. */
+  --hero-pad: max(
+    1.45rem,
+    6vmin,
+    env(safe-area-inset-top),
+    env(safe-area-inset-right),
+    env(safe-area-inset-bottom),
+    env(safe-area-inset-left)
+  );
+  --hero-width: min(
+    calc(100vw - 2 * var(--hero-pad)),
+    620px,
+    max(12rem, calc((var(--app-h) - 20rem) * 1.12))
+  );
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--ivory);
+  color: #2c2a24;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html.is-hero-held,
+html.is-hero-held body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  touch-action: pan-y;
+  background:
+    radial-gradient(120% 90% at 50% 45%, var(--ivory) 55%, var(--ivory-deep) 100%),
+    var(--ivory);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0.09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@media (hover: none) and (pointer: coarse) {
+  body::before {
+    display: none;
+  }
+}
+
+.hero {
+  position: relative;
+  z-index: 20;
+  min-height: var(--app-h);
+  height: var(--app-h);
+}
+
+.hero__stage {
+  position: relative;
+  z-index: 20;
+  height: var(--app-h);
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  justify-items: center;
+  /* Room inside the zigzag so the names and the cue stay clear of it. */
+  padding:
+    calc(var(--hero-pad) + 1.35rem)
+    calc(var(--hero-pad) + 1.05rem)
+    calc(var(--hero-pad) + 1.55rem)
+    calc(var(--hero-pad) + 1.05rem);
+  overflow: hidden;
+}
+
+.hero__intro {
+  grid-row: 1;
+  align-self: stretch;
+  justify-self: stretch;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  container-type: size;
+  text-align: center;
+  color: #2c261f;
+  opacity: 0;
+  transform: translateY(0.55rem);
+  transition:
+    opacity 1.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 1.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.hero__intro-fit {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  font-size: clamp(9px, 4.9cqh, 14.5px);
+}
+
+.hero__intro p {
+  margin: 0;
+}
+
+.hero__intro-deity {
+  display: block;
+  flex: 0 1 auto;
+  width: auto;
+  height: clamp(2.4rem, 30cqh, 4.6rem);
+  min-height: 0;
+  max-width: 100%;
+  margin: 0 auto 0.35em;
+  object-fit: contain;
+  object-position: center bottom;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero__intro-kicker {
+  flex: none;
+  font-family: Cinzel, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 0.78em;
+  letter-spacing: 0.22em;
+  line-height: 1.3;
+  padding-left: 0.22em;
+  color: #4b6a2c;
+}
+
+.hero__intro-names {
+  flex: none;
+  margin-top: 0.38em;
+}
+
+.hero__intro-names span {
+  display: block;
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-weight: 600;
+  font-size: 1.22em;
+  line-height: 1.2;
+  font-synthesis: none;
+}
+
+.hero__intro p.hero__intro-family {
+  flex: none;
+  margin-top: 0.28em;
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.12em;
+  line-height: 1.2;
+  color: #4a4338;
+  font-synthesis: none;
+}
+
+.hero__intro p.hero__intro-invite {
+  flex: none;
+  margin-top: 0.45em;
+  margin-bottom: 0;
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.32em;
+  line-height: 1.15;
+  color: #3d342c;
+  font-synthesis: none;
+}
+
+@container (max-height: 8.5rem) {
+  .hero__intro-deity {
+    display: none;
+  }
+
+  .hero__intro-kicker,
+  .hero__intro-names span,
+  .hero__intro p.hero__intro-family,
+  .hero__intro p.hero__intro-invite {
+    line-height: 1.08;
+  }
+}
+
+.is-static .hero__intro,
+.hero.is-introduced .hero__intro {
+  opacity: 1;
+  transform: none;
+}
+
+.hero.is-parting.is-introduced .hero__intro {
+  transition: none;
+  opacity: var(--intro);
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__intro {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 45%, var(--ivory) 55%, var(--ivory-deep) 100%),
+    var(--ivory);
+}
+
+.hero__frame {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  left: max(0.55rem, env(safe-area-inset-left, 0px));
+  top: max(0.55rem, env(safe-area-inset-top, 0px));
+  width: calc(
+    100% - max(0.55rem, env(safe-area-inset-left, 0px)) - max(0.55rem, env(safe-area-inset-right, 0px))
+  );
+  height: calc(
+    100% - max(0.55rem, env(safe-area-inset-top, 0px)) - max(0.7rem, env(safe-area-inset-bottom, 0px))
+  );
+}
+
+.hero__cue {
+  grid-row: 3;
+  align-self: end;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  min-height: 1.4em;
+  font-family: "Pinyon Script", "Snell Roundhand", cursive;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+  letter-spacing: 0.06em;
+  -webkit-text-stroke: 0.35px currentColor;
+  line-height: 1;
+  color: #9b2d58;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero__cue-hold,
+.hero__cue-scroll {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0;
+}
+
+.hero.is-holding .hero__cue-hold {
+  display: block;
+  opacity: 0.85;
+}
+
+.hero.is-scroll-ready .hero__cue-scroll {
+  display: flex;
+  opacity: 1;
+}
+
+.hero__cue-arrow {
+  display: block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+}
+
+.hero.is-scroll-ready .hero__cue-scroll {
+  animation: hero-cue-bob 1.35s ease-in-out infinite;
+}
+
+@keyframes hero-cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.72;
+  }
+  50% {
+    transform: translateY(0.42rem);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero.is-scroll-ready .hero__cue-scroll {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero {
+    /* Stage in the flow while Ganesha is up, plus room for the names to leave. */
+    height: calc(var(--app-h) * 2.7);
+  }
+
+  .hero__stage {
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    background: transparent;
+  }
+
+  /* Once Ganesha is gone, the stage pins and the section is only scroll room,
+     so finishing the names lands on the venue instead of empty gold. */
+  .hero.is-short,
+  .hero.is-pinned,
+  .hero.is-complete {
+    height: calc(var(--app-h) * 1.7);
+  }
+
+  .hero.is-pinned .hero__stage {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .hero.is-complete .hero__stage,
+  .hero.is-open .hero__stage {
+    pointer-events: none;
+  }
+
+  .hero.is-open,
+  .hero.is-complete {
+    z-index: 0;
+  }
+
+  .hero.is-complete .hero__stage {
+    visibility: hidden;
+  }
+
+  .name-row {
+    transform-origin: center center;
+  }
+}
+
+.hero__title {
+  grid-row: 2;
+  align-self: center;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  width: min(100%, var(--hero-width));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-weight: normal;
+}
+
+.name-row {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.name-row canvas,
+.name-row > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.flowers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.flower,
+.bud {
+  position: absolute;
+  display: block;
+}
+
+.flower img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.bud {
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.bud--pink {
+  background: radial-gradient(60% 70% at 45% 30%, #f7b5d4 0%, #d9508f 55%, #5d7a32 100%);
+}
+
+.bud--yellow {
+  background: radial-gradient(60% 70% at 45% 30%, #fff1a8 0%, #e9c227 55%, #5d7a32 100%);
+}
+
+.weds {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  margin: calc(var(--hero-width) * -0.012) 0 calc(var(--hero-width) * -0.006);
+  color: var(--leaf);
+}
+
+.weds__word {
+  font-family: "Pinyon Script", "Snell Roundhand", cursive;
+  font-size: calc(var(--hero-width) * 0.068);
+  line-height: 1;
+  padding: 0 0.1em 0.12em;
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(0.25em);
+}
+
+.weds__line {
+  height: 1px;
+  width: calc(var(--hero-width) * 0.12);
+  background: linear-gradient(90deg, transparent, var(--leaf-soft));
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+.weds__line:last-child {
+  background: linear-gradient(90deg, var(--leaf-soft), transparent);
+  transform-origin: left center;
+}
+
+.is-static .weds__word,
+.hero.is-lettered .weds__word {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+.is-static .weds__line,
+.hero.is-lettered .weds__line {
+  transform: none;
+}
+
+.event-card {
+  margin: 0;
+  font-family: "Instrument Serif", Palatino, Georgia, serif;
+  font-size: clamp(1.05rem, 4.4vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.event-card p {
+  margin: 0 0 0.28em;
+}
+
+.event-card p:last-child {
+  margin-bottom: 0;
+}
+
+.event-card em {
+  font-style: italic;
+}
+
+.event-card__colors {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.5rem;
+  width: 100%;
+}
+
+.hue {
+  --c: #ccc;
+  display: inline-grid;
+  place-items: center;
+  width: 1.28rem;
+  height: 1.28rem;
+  flex: 0 0 auto;
+}
+
+.hue svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 0.6px rgba(20, 12, 8, 0.45));
+}

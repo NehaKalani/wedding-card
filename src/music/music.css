@@ -1,0 +1,99 @@
+.music__track {
+  display: none;
+}
+
+.music {
+  position: fixed;
+  right: max(0.9rem, env(safe-area-inset-right));
+  bottom: max(0.9rem, env(safe-area-inset-bottom));
+  z-index: 50;
+  width: 2.85rem;
+  height: 2.85rem;
+  padding: 0;
+  border: 1px solid rgba(251, 247, 239, 0.4);
+  border-radius: 50%;
+  background: rgba(28, 24, 18, 0.72);
+  color: #fbf7ef;
+  box-shadow: 0 10px 22px rgba(20, 16, 10, 0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(0.45rem);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease,
+    visibility 0.55s,
+    background 0.25s ease;
+}
+
+.music.is-live {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+
+.music:hover,
+.music:focus-visible {
+  background: rgba(28, 24, 18, 0.62);
+}
+
+.music:focus-visible {
+  outline: 2px solid rgba(251, 247, 239, 0.7);
+  outline-offset: 3px;
+}
+
+.music svg {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.music__wave {
+  fill: none;
+}
+
+.music__off {
+  display: none;
+}
+
+.music.is-muted .music__on {
+  display: none;
+}
+
+.music.is-muted .music__off {
+  display: block;
+}
+
+.music.is-waiting {
+  animation: music-wait 1.8s ease-in-out infinite;
+}
+
+@keyframes music-wait {
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 10px 22px rgba(20, 16, 10, 0.18), 0 0 0 6px rgba(251, 247, 239, 0.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music,
+  .music.is-live {
+    transition: none;
+    transform: none;
+  }
+
+  .music.is-waiting {
+    animation: none;
+  }
+}

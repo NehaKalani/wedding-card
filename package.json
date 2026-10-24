@@ -1,0 +1,19 @@
+{
+  "name": "nidhi-weds-rahul",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:hero-layers": "python3 tools/build_hero_layers.py assets-src/hero/full_reference.png public/hero",
+    "build:sangeet-layers": "python3 tools/build_sangeet_layers.py assets-src/sangeet public/sangeet",
+    "build:haldi-layers": "python3 tools/build_haldi_layers.py assets-src/haldi public/haldi",
+    "build:venue-layers": "python3 tools/build_venue_layers.py assets-src/venue public/venue",
+    "build:maayra-layers": "python3 tools/build_maayra_layers.py assets-src/maayra public/maayra"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0"
+  }
+}

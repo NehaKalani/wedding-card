@@ -1,0 +1,1 @@
+Bandhani invitation assets. SVGs contain embedded PNG imagery to preserve original texture. Background lower section is reconstructed from bandhani fabric and is not a perfect original underneath-object recovery. Cutouts use approximate soft masks; overlapping drums may include neighboring pixels. Use dholkis.svg for the cleanest grouped movement. Canvas 1068 x 1472.

@@ -1,0 +1,1 @@
+Sunehri Haldi event-details assets. SVGs contain embedded transparent PNG artwork extracted from supplied graphics. Checkerboard pixels have been chroma-masked; very fine gray highlights may be missing. Includes PNGs for preview. All components have their own viewBox for animation.

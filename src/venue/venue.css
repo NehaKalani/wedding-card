@@ -1,0 +1,519 @@
+@font-face {
+  font-family: "Cedarville Cursive";
+  src: url("/fonts/cedarville/CedarvilleCursive-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.venue {
+  --venue-w: 941;
+  --venue-h: 1672;
+  --foil: 1;
+  --scene: 1;
+  position: relative;
+  z-index: 1;
+  height: calc(var(--app-h) * 2);
+  min-height: min(560px, var(--app-h));
+  background:
+    radial-gradient(70% 55% at 50% 42%, #6a1b2a 0%, #3a0a14 58%, #24060d 100%),
+    #2a0810;
+}
+
+.venue__stage {
+  position: sticky;
+  top: 0;
+  height: var(--app-h);
+  min-height: min(560px, var(--app-h));
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.venue.is-revealed {
+  height: var(--app-h);
+  background:
+    radial-gradient(70% 55% at 50% 42%, #6a1b2a 0%, #3a0a14 58%, #24060d 100%),
+    #2a0810;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venue {
+    height: var(--app-h);
+  }
+}
+
+.venue img {
+  max-width: none;
+}
+
+.venue__art {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: calc(var(--venue-w) * 1px);
+  height: calc(var(--venue-h) * 1px);
+  transform-origin: 0 0;
+  opacity: var(--foil);
+}
+
+/* Held back while Ganesha is on screen, so the foil cannot cover it. */
+.venue.is-held .venue__art {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.venue.is-bridge .venue__art {
+  position: fixed;
+  z-index: 1;
+}
+
+.venue.is-revealed .venue__art {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.venue.is-revealed .venue__stage {
+  opacity: var(--scene);
+  background:
+    radial-gradient(70% 55% at 50% 42%, #6a1b2a 0%, #3a0a14 58%, #24060d 100%),
+    #2a0810;
+}
+
+.venue.is-scratchable:not(.is-revealed) .venue__art {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8;
+}
+
+/* The gold card is fixed while you scratch. The hint lives in the sticky
+   stage, so a flick that slips past the pin carries the words up alone. */
+.venue.is-scratchable:not(.is-revealed) .venue__hint {
+  position: fixed;
+}
+
+.venue.is-revealed.is-bridge {
+  background: transparent;
+}
+
+.venue.is-revealed.is-bridge .venue__stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.venue__foil {
+  position: absolute;
+  inset: 0;
+  background: url("/venue/gold.webp") center / cover no-repeat;
+  pointer-events: none;
+}
+
+.venue.is-ready .venue__foil,
+.venue.is-static .venue__foil {
+  visibility: hidden;
+}
+
+.venue__reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: max(5.5vh, calc(env(safe-area-inset-top) + 1.25rem)) 5vw 0;
+  pointer-events: none;
+}
+
+.venue__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 1.45s ease 380ms,
+    transform 1.45s ease 380ms;
+}
+
+.venue.is-revealed .venue__copy {
+  opacity: 1;
+  transform: none;
+}
+
+.venue__dates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 7.4vw, 2.35rem);
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  color: #f3d59a;
+  text-align: center;
+  font-synthesis: none;
+}
+
+.venue__dates span {
+  display: block;
+  white-space: nowrap;
+}
+
+.venue__until {
+  margin: 0;
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1rem, 4.2vw, 1.25rem);
+  letter-spacing: 0.08em;
+  color: #f3d59a;
+  text-align: center;
+  font-synthesis: none;
+}
+
+.venue__timer {
+  display: flex;
+  gap: 0.45rem;
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.venue__timer span {
+  min-width: 3.7rem;
+  padding: 0.42rem 0.32rem 0.34rem;
+  border: 1px solid rgba(243, 213, 154, 0.35);
+  border-radius: 8px;
+  background: rgba(36, 8, 14, 0.45);
+  color: #f6e6b8;
+  text-align: center;
+}
+
+.venue__timer b {
+  display: block;
+  font-size: clamp(1.5rem, 6.4vw, 2.05rem);
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1;
+}
+
+.venue__timer small {
+  display: block;
+  margin-top: 0.18rem;
+  font-size: 0.58rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.venue__building {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: min(calc(var(--app-h) * 0.78), calc(var(--app-h) - 14.5rem));
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 100%;
+  transform: translateY(10%) scale(0.9);
+  transform-origin: 50% 100%;
+  transition: transform 2.2s cubic-bezier(0.22, 0.72, 0.2, 1);
+}
+
+.venue.is-revealed .venue__building {
+  transform: none;
+}
+
+@media (min-width: 700px) {
+  .venue__building {
+    height: var(--app-h);
+    object-position: 50% 72%;
+  }
+}
+
+.venue__scratch,
+.venue__glow {
+  position: absolute;
+  display: block;
+}
+
+.venue__scratch {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.venue__scratch {
+  z-index: 2;
+  touch-action: pan-y;
+  pointer-events: none;
+  cursor: none;
+  filter: brightness(0.58) saturate(0.92) contrast(1.18);
+}
+
+.venue.is-scratchable:not(.is-revealed) .venue__scratch {
+  touch-action: none;
+}
+
+.venue.is-scratchable .venue__scratch {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><circle cx='10' cy='18' r='7' fill='%23d4b07a' stroke='%236a3a1a' stroke-width='1.4'/><path d='M16 13 L24 4' stroke='%23d4b07a' stroke-width='3' stroke-linecap='round'/></svg>") 8 20, crosshair;
+}
+
+/* Held only while the card is pinned. Leaving it on .is-scratchable blocked
+   every later swipe, because that class stays after the reveal. */
+.venue.is-scroll-locked {
+  touch-action: none;
+}
+
+.venue.is-shaking .venue__hint {
+  animation: venue-hint-shake 0.5s ease-in-out;
+}
+
+@keyframes venue-hint-shake {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  20% {
+    transform: translate(calc(-50% - 7px), -50%);
+  }
+  40% {
+    transform: translate(calc(-50% + 7px), -50%);
+  }
+  60% {
+    transform: translate(calc(-50% - 5px), -50%);
+  }
+  80% {
+    transform: translate(calc(-50% + 4px), -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venue.is-shaking .venue__hint {
+    animation: none;
+  }
+}
+
+.venue__glow {
+  z-index: 8;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(0.6px) saturate(1.15);
+}
+
+.venue__piece {
+  position: absolute;
+  display: block;
+  margin: 0;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.venue__radha-side {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.venue__krishna,
+.venue__radha-side {
+  opacity: 1;
+}
+
+.venue__krishna {
+  z-index: 7;
+}
+
+.venue__radha {
+  z-index: 6;
+}
+
+.venue__scroll-cue {
+  position: absolute;
+  left: 50%;
+  top: 64%;
+  z-index: 9;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-size: clamp(1.02rem, 3.4vw, 1.28rem);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #fff8e6;
+  text-shadow: 0 1px 0 rgba(255, 250, 230, 0.65), 0 2px 10px rgba(90, 50, 12, 0.35);
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 350ms ease;
+}
+
+.venue__scroll-cue.is-on {
+  opacity: 0.92;
+  animation: venue-scroll-bounce 1.55s ease-in-out infinite;
+}
+
+@keyframes venue-scroll-bounce {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 0.72;
+  }
+  50% {
+    transform: translate(-50%, calc(-50% + 0.38rem));
+    opacity: 1;
+  }
+}
+
+.venue.is-held .venue__scroll-cue,
+.venue.is-scratchable .venue__scroll-cue,
+.venue.is-revealed .venue__scroll-cue {
+  opacity: 0;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venue__scroll-cue.is-on {
+    animation: none;
+    opacity: 0.85;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.venue__hint {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 9;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  font-family: "Cedarville Cursive", "Pinyon Script", cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(1.9rem, 7.6vw, 2.85rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: #fff8e6;
+  text-shadow: 0 1px 0 rgba(255, 250, 230, 0.7), 0 2px 10px rgba(90, 50, 12, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+  white-space: nowrap;
+}
+
+.venue__hint i {
+  font-style: normal;
+  font-weight: 400;
+  padding: 0 0.22em;
+}
+
+.venue__hint.is-on {
+  z-index: 9;
+  opacity: 1;
+  animation: venue-hint-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes venue-hint-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.venue__title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.venue__confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.venue__confetti i {
+  position: absolute;
+  top: var(--top);
+  left: var(--left);
+  display: block;
+  width: var(--w);
+  height: var(--h);
+  background: var(--c);
+  opacity: 0.96;
+  animation: venue-confetti var(--dur) var(--delay) cubic-bezier(0.18, 0.62, 0.28, 1) forwards;
+}
+
+.venue__confetti i.is-ribbon {
+  border-radius: 1px;
+}
+
+.venue__confetti i.is-dot {
+  width: var(--w);
+  height: var(--w);
+  border-radius: 50%;
+}
+
+.venue__confetti i.is-petal {
+  width: calc(var(--w) * 0.7);
+  height: var(--h);
+  border-radius: 70% 10% 70% 10%;
+}
+
+.venue__confetti i.is-diamond {
+  width: var(--w);
+  height: var(--w);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+.venue__confetti i.is-star {
+  width: var(--w);
+  height: var(--w);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+@keyframes venue-confetti {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx), var(--dy), 0) rotate(var(--rot));
+    opacity: 0.12;
+  }
+}
+
+.venue.is-static .venue__scratch,
+.venue.is-static .venue__glow,
+.venue.is-static .venue__piece,
+.venue.is-static .venue__radha-side,
+.venue.is-static .venue__hint,
+.venue.is-static .venue__scroll-cue,
+.venue.is-static .venue__confetti {
+  display: none;
+}

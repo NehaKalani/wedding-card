@@ -1,0 +1,348 @@
+.regards {
+  position: relative;
+  z-index: 6;
+  height: calc(var(--app-h) * 3.4);
+  background: #f4ead8 url("/regards/pattern.jpg") center / cover no-repeat;
+  color: #f7f1e4;
+}
+
+.regards__pin {
+  position: sticky;
+  top: 0;
+  height: var(--app-h);
+  display: grid;
+  place-items: center;
+  padding:
+    max(1.15rem, env(safe-area-inset-top))
+    max(0.9rem, env(safe-area-inset-right))
+    max(1.15rem, env(safe-area-inset-bottom))
+    max(0.9rem, env(safe-area-inset-left));
+  background: #f4ead8 url("/regards/pattern.jpg") center / cover no-repeat;
+}
+
+.regards__panel {
+  position: relative;
+  display: grid;
+  width: min(68rem, 100%);
+  background: #556338;
+}
+
+.regards__sheet {
+  grid-area: 1 / 1;
+  padding: clamp(1.15rem, 2.8vh, 2rem) clamp(1rem, 2.4vw, 2rem);
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
+.regards__sheet--first,
+.regards__sheet--more,
+.regards__sheet--close {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.regards__sheet--first {
+  opacity: 1;
+}
+
+.regards__sheet--close {
+  display: grid;
+  place-items: center;
+}
+
+.regards[data-step="0"] .regards__sheet--first {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+  transition-delay: 0.5s;
+}
+
+.regards[data-step="1"] .regards__sheet--first,
+.regards[data-step="2"] .regards__sheet--first,
+.regards[data-step="2"] .regards__sheet--more {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+.regards[data-step="1"] .regards__sheet--more,
+.regards[data-step="2"] .regards__sheet--close {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+  transition-delay: 0.5s;
+}
+
+.regards__close {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+  text-align: center;
+}
+
+.regards__waiting {
+  margin: 0;
+  font-family: "Pinyon Script", "Snell Roundhand", cursive;
+  font-size: clamp(2.6rem, 8vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: #f7f1e4;
+}
+
+.regards__map {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+  font-family: Cinzel, "Times New Roman", serif;
+  font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f3e7cf;
+  text-decoration: none;
+}
+
+.regards__map-pin {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 1.35em;
+  line-height: 1;
+}
+
+.regards__map span:last-child {
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+  text-decoration-thickness: 1px;
+}
+
+.regards__map:hover,
+.regards__map:focus-visible {
+  color: #fffaf2;
+}
+
+.regards__stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  gap: clamp(1.15rem, 3.4vh, 2.2rem);
+}
+
+.regards__family {
+  text-align: left;
+}
+
+.regards__lead {
+  margin: 0;
+  font-family: "Pinyon Script", "Snell Roundhand", cursive;
+  font-size: clamp(1.7rem, 4.6vw, 2.7rem);
+  font-weight: 400;
+  line-height: 1;
+  color: #f7f1e4;
+}
+
+.regards__house {
+  margin: 0.15rem 0 0.7rem;
+  font-family: Cinzel, "Times New Roman", serif;
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #f3e7cf;
+}
+
+.regards__names {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 1rem;
+  row-gap: 0.7rem;
+  align-items: baseline;
+  text-align: left;
+}
+
+.regards__names li {
+  display: contents;
+}
+
+.regards__names span,
+.regards__names em {
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  line-height: 1.25;
+  text-align: left;
+  font-synthesis: none;
+}
+
+.regards__names span {
+  font-size: clamp(1.12rem, 3.4vw, 1.45rem);
+  font-weight: 600;
+}
+
+.regards__woman {
+  white-space: nowrap;
+}
+
+.regards__names em {
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(0.82rem, 2.3vw, 0.98rem);
+  white-space: nowrap;
+  color: #f6edd8;
+}
+
+@media (max-width: 859px) {
+  .regards__pin {
+    align-items: stretch;
+    justify-items: center;
+    padding-bottom: max(4.6rem, calc(0.75rem + env(safe-area-inset-bottom)));
+  }
+
+  .regards__panel {
+    height: 100%;
+    min-height: 0;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .regards__sheet--first,
+  .regards__sheet--more,
+  .regards__sheet--close {
+    height: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+  }
+
+  .regards__sheet--first,
+  .regards__sheet--more {
+    display: grid;
+    align-content: center;
+    padding: 0.75rem 0.85rem 0.7rem;
+  }
+
+  .regards__sheet--first .regards__stage,
+  .regards__sheet--more .regards__stage {
+    gap: 0.6rem;
+  }
+
+  .regards__sheet--first .regards__family + .regards__family,
+  .regards__sheet--more .regards__family + .regards__family {
+    margin-top: 0.75rem;
+  }
+
+  .regards__sheet--first .regards__lead,
+  .regards__sheet--more .regards__lead {
+    font-size: 1.45rem;
+  }
+
+  .regards__sheet--first .regards__house,
+  .regards__sheet--more .regards__house {
+    margin: 0.08rem 0 0.3rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+  }
+
+  .regards__names {
+    row-gap: 0.24rem;
+  }
+
+  .regards__sheet--first .regards__names span,
+  .regards__sheet--more .regards__names span {
+    font-size: 1.08rem;
+    line-height: 1.2;
+  }
+
+  .regards__sheet--first .regards__names em,
+  .regards__sheet--more .regards__names em {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) {
+    padding: 0.55rem 0.75rem 0.5rem;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) .regards__stage {
+    gap: 0.45rem;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) .regards__family + .regards__family {
+    margin-top: 0.5rem;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) .regards__lead {
+    font-size: 1.28rem;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) .regards__house {
+    margin: 0.04rem 0 0.18rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) .regards__names {
+    column-gap: 0.4rem;
+    row-gap: 0.06rem;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) .regards__names span,
+  .regards__sheet:has(.regards__stage--packed) .regards__names em {
+    line-height: 1.1;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) .regards__names span {
+    font-size: 0.92rem;
+  }
+
+  .regards__sheet:has(.regards__stage--packed) .regards__names em {
+    font-size: 0.68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .regards {
+    height: auto;
+    min-height: var(--app-h);
+  }
+
+  .regards__pin {
+    position: relative;
+    height: auto;
+    min-height: var(--app-h);
+  }
+
+  .regards[data-step] .regards__sheet--first,
+  .regards[data-step] .regards__sheet--more,
+  .regards[data-step] .regards__sheet--close {
+    position: relative;
+    grid-area: auto;
+    inset: auto;
+    opacity: 1;
+    pointer-events: auto;
+    transition: none;
+  }
+
+  .regards__sheet--close {
+    min-height: 16rem;
+  }
+}
+
+@media (min-width: 860px) {
+  .regards__stage {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    column-gap: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .regards__sheet--more .regards__stage {
+    column-gap: clamp(3.5rem, 8vw, 7rem);
+  }
+
+  .regards__names span {
+    font-size: clamp(1.15rem, 1.25vw, 1.4rem);
+  }
+
+  .regards__names em {
+    font-size: clamp(0.85rem, 0.95vw, 1rem);
+  }
+}

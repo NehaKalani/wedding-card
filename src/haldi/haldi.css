@@ -1,0 +1,109 @@
+.haldi {
+  --gap: 0px;
+  --scale: 0.5;
+  --offset-x: 0px;
+  position: relative;
+  height: var(--app-h);
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, #9ac2e3 0%, #bcd6e6 45%, #f6ecd8 75%);
+}
+
+.haldi__sky,
+.haldi__petals {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.haldi__sky {
+  z-index: 0;
+}
+
+.haldi__petals {
+  z-index: 2;
+}
+
+.haldi__details {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: min(78vw, 22rem);
+  z-index: 3;
+  transform: translateX(-50%);
+}
+
+.haldi__details img {
+  display: block;
+  height: auto;
+}
+
+.haldi__detail-date,
+.haldi__detail-line,
+.haldi__detail-theme,
+.haldi__detail-colors {
+  filter: brightness(1.34) saturate(0.86) contrast(0.92);
+}
+
+.haldi__detail-date {
+  width: 72%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.35em;
+}
+
+.haldi__detail-line {
+  width: 100%;
+  height: auto;
+}
+
+.haldi__detail-theme {
+  width: 86%;
+  height: auto;
+  margin-top: 0.08em;
+}
+
+.haldi__detail-colors {
+  width: 100%;
+  height: auto;
+  margin-top: 0.55em;
+}
+
+/* The painting, in its own 1024px-wide pixel space, pinned to the bottom edge. */
+.haldi__art {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: 1024px;
+  height: calc(1536px + var(--gap));
+  transform-origin: 0 100%;
+  transform: translateX(var(--offset-x)) scale(var(--scale));
+}
+
+.haldi__art img,
+.haldi__art div,
+.haldi__title {
+  position: absolute;
+  display: block;
+  margin: 0;
+}
+
+.haldi__title img {
+  position: static;
+  width: 100%;
+  height: auto;
+}
+
+/* Wider than the phone framing: soften the painting's cut sides into the sky. */
+.haldi.is-wide .haldi__art {
+  mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%);
+}

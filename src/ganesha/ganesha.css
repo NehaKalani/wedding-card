@@ -1,0 +1,185 @@
+@font-face {
+  font-family: Amita;
+  src: url("/fonts/amita/Amita-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Amita;
+  src: url("/fonts/amita/Amita-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html.is-ganesha-held,
+html.is-ganesha-held body {
+  overflow: hidden;
+  height: 100%;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+.ganesha {
+  --ganesha-olive: radial-gradient(78% 62% at 50% 64%, #87945c 0%, #6c7846 42%, #515e33 100%);
+  --ganesha-white: #ffffff;
+  --ganesha-ivory: #fffaf2;
+  position: relative;
+  z-index: 30;
+  height: var(--app-h);
+  min-height: var(--app-h);
+  background: var(--ganesha-olive);
+}
+
+.ganesha__stage {
+  position: relative;
+  z-index: 30;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.7rem, 2.2vh, 1.15rem);
+  padding:
+    max(0.85rem, env(safe-area-inset-top))
+    clamp(0.85rem, 3vw, 2rem)
+    max(0.7rem, env(safe-area-inset-bottom));
+  overflow: hidden;
+  background: var(--ganesha-olive);
+}
+
+.ganesha__shloka {
+  margin: 0;
+  text-align: center;
+  font-family: Amita, "Kohinoor Devanagari", "Noto Serif Devanagari", serif;
+  font-size: clamp(1.36rem, 2.9vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--ganesha-white);
+  position: relative;
+  z-index: 1;
+}
+
+.ganesha__line {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  column-gap: 0.28em;
+  white-space: nowrap;
+}
+
+.ganesha__line + .ganesha__line {
+  margin-top: 0.06em;
+}
+
+.ganesha__figure {
+  flex: 0 1 auto;
+  min-height: 0;
+  height: auto;
+  width: auto;
+  max-width: min(86vw, 460px);
+  /* The last term keeps the shloka and the invitation button on screen
+     when the phone is on its side and this block is wider than 720px. */
+  max-height: min(calc(var(--app-h) * 0.58), 500px, calc(var(--app-h) - 15.75rem));
+  object-fit: contain;
+  filter: drop-shadow(0 20px 26px rgba(32, 38, 12, 0.22));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.ganesha__invite {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0.2rem 1.4rem 0.15rem;
+  border: 0;
+  background: none;
+  color: var(--ganesha-ivory);
+  cursor: pointer;
+}
+
+.ganesha__invite-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: min(42vw, 8.5rem);
+}
+
+.ganesha__invite-mark::before,
+.ganesha__invite-mark::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(255, 250, 242, 0.72));
+}
+
+.ganesha__invite-mark::after {
+  background: linear-gradient(90deg, rgba(255, 250, 242, 0.72), transparent);
+}
+
+.ganesha__invite-mark span {
+  width: 0.36rem;
+  height: 0.36rem;
+  flex: none;
+  background: var(--ganesha-ivory);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 3px rgba(255, 250, 242, 0.12);
+}
+
+.ganesha__invite-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.18rem;
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.45rem, 4vw, 1.9rem);
+  letter-spacing: 0.045em;
+  line-height: 1.05;
+  font-synthesis: none;
+}
+
+.ganesha__invite-lead {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.62em;
+  letter-spacing: 0.08em;
+  opacity: 0.88;
+}
+
+.ganesha__invite:hover,
+.ganesha__invite:focus-visible {
+  color: #ffffff;
+}
+
+.ganesha__invite:focus-visible {
+  outline: 1px solid rgba(255, 250, 242, 0.75);
+  outline-offset: 8px;
+}
+
+.ganesha.is-opened .ganesha__invite {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .ganesha__shloka {
+    /* Two lines, sized to the phone width. 15.2em is the longer line in Amita. */
+    font-size: min(1.62rem, calc((100vw - 2.75rem) / 15.2));
+  }
+
+  .ganesha__figure {
+    max-width: min(88vw, 22.5rem);
+    max-height: min(calc(var(--app-h) * 0.56), calc(var(--app-h) - 16.5rem));
+  }
+
+  .ganesha__invite-label {
+    font-size: clamp(1.32rem, 5.8vw, 1.65rem);
+  }
+}

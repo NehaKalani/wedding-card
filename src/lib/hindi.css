@@ -1,0 +1,242 @@
+.haldi__copy-hi {
+  display: none;
+}
+
+html[data-lang="hi"] {
+  --hi: "Noto Serif Devanagari", "Tiro Devanagari Hindi", serif;
+  --hi-script: Amita, "Noto Serif Devanagari", serif;
+}
+
+html[data-lang="hi"] :is(
+  .ganesha__invite-label,
+  .hero__intro-kicker,
+  .hero__intro-names span,
+  .hero__intro-family,
+  .hero__intro-invite,
+  .hero__cue,
+  .venue__dates,
+  .venue__timer small,
+  .venue__scroll-cue,
+  .event-card,
+  .maayra__date,
+  .maayra__hosts,
+  .sunset__rite--day p:not(.sunset__rite-name),
+  .sunset__rite--night p:not(.sunset__rite-name),
+  .regards__house,
+  .regards__names span,
+  .regards__names em,
+  .regards__map,
+  .haldi__copy-hi
+) {
+  font-family: var(--hi);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[data-lang="hi"] :is(
+  .maayra__title,
+  .regards__waiting,
+  .venue__hint
+) {
+  font-family: var(--hi-script);
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[data-lang="hi"] .ganesha__invite-lead,
+html[data-lang="hi"] .venue__until {
+  display: none;
+}
+
+html[data-lang="hi"] .hero__intro-kicker {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+}
+
+html[data-lang="hi"] .hero__intro-names span {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.22em;
+  line-height: 1.28;
+}
+
+html[data-lang="hi"] .hero__intro-family {
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.12em;
+  line-height: 1.28;
+}
+
+html[data-lang="hi"] .hero__intro-invite {
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.32em;
+  line-height: 1.25;
+}
+
+html[data-lang="hi"] .hero__cue {
+  -webkit-text-stroke: 0;
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+html[data-lang="hi"] .hero__cue-scroll {
+  align-items: center;
+  gap: 0.4rem;
+}
+
+html[data-lang="hi"] .when-scroll {
+  line-height: 1;
+}
+
+html[data-lang="hi"] .hero__cue-arrow {
+  width: 0.48rem;
+  height: 0.48rem;
+  margin-top: -0.42em;
+  border-right-width: 1.75px;
+  border-bottom-width: 1.75px;
+}
+
+html[data-lang="hi"] .sunset__rite--day .sunset__rite-name {
+  font-family: Amita, "Noto Serif Devanagari", serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+html[data-lang="hi"] .maayra__title {
+  font-size: clamp(2.8rem, 13vw, 4.4rem);
+  line-height: 1.25;
+}
+
+html[data-lang="hi"] .regards__waiting {
+  font-size: clamp(2rem, 7.2vw, 3.2rem);
+  line-height: 1.45;
+}
+
+html[data-lang="hi"] .regards__lead {
+  font-family: var(--hi);
+  font-size: clamp(1.45rem, 4.2vw, 2.2rem);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+html[data-lang="hi"] .venue__timer span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.32rem 0.34rem;
+}
+
+html[data-lang="hi"] .venue__timer b {
+  font-family: "Cormorant Garamond", Palatino, Georgia, serif;
+  line-height: 1;
+}
+
+html[data-lang="hi"] .venue__timer small,
+html[data-lang="hi"] .maayra__hosts-label,
+html[data-lang="hi"] .sangeet__details em,
+html[data-lang="hi"] .regards__house,
+html[data-lang="hi"] .regards__sheet:has(.regards__stage--packed) .regards__house {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[data-lang="hi"] .venue__timer small {
+  margin-top: 0.1rem;
+  font-size: 0.56rem;
+  line-height: 1;
+}
+
+html[data-lang="hi"] .regards__names span,
+html[data-lang="hi"] .regards__names em {
+  line-height: 1.3;
+}
+
+html[data-lang="hi"] .regards__woman,
+html[data-lang="hi"] .regards__names em,
+html[data-lang="hi"] .regards__map {
+  white-space: normal;
+}
+
+html[data-lang="hi"] .sangeet__details em {
+  font-family: var(--hi);
+  font-style: italic;
+  font-size: 1.15em;
+}
+
+html[data-lang="hi"] .haldi__details > img {
+  display: none;
+}
+
+html[data-lang="hi"] .haldi__copy-hi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.28rem;
+  width: 100%;
+  color: #6d4014;
+  font-size: clamp(1.05rem, 4vw, 1.35rem);
+  line-height: 1.4;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 248, 230, 0.85);
+}
+
+html[data-lang="hi"] .haldi__copy-hi p {
+  margin: 0;
+}
+
+html[data-lang="hi"] .haldi__copy-hi p:first-child {
+  font-size: 1.18em;
+}
+
+html[data-lang="hi"] .venue__hint i:last-child {
+  display: none;
+}
+
+@media (max-width: 859px) {
+  html[data-lang="hi"] .regards__sheet--first .regards__lead,
+  html[data-lang="hi"] .regards__sheet--more .regards__lead {
+    font-size: 1.32rem;
+    line-height: 1.22;
+  }
+
+  html[data-lang="hi"] .regards__sheet--first .regards__house,
+  html[data-lang="hi"] .regards__sheet--more .regards__house {
+    font-size: 0.74rem;
+  }
+
+  html[data-lang="hi"] .regards__sheet--first .regards__names span,
+  html[data-lang="hi"] .regards__sheet--more .regards__names span {
+    font-size: 1.02rem;
+    line-height: 1.18;
+  }
+
+  html[data-lang="hi"] .regards__sheet--first .regards__names em,
+  html[data-lang="hi"] .regards__sheet--more .regards__names em {
+    font-size: 0.74rem;
+    line-height: 1.18;
+  }
+
+  html[data-lang="hi"] .regards__sheet:has(.regards__stage--packed) .regards__lead {
+    font-size: 1.18rem;
+  }
+
+  html[data-lang="hi"] .regards__sheet:has(.regards__stage--packed) .regards__house {
+    font-size: 0.66rem;
+  }
+
+  html[data-lang="hi"] .regards__sheet:has(.regards__stage--packed) .regards__names span {
+    font-size: 0.88rem;
+  }
+
+  html[data-lang="hi"] .regards__sheet:has(.regards__stage--packed) .regards__names em {
+    font-size: 0.64rem;
+  }
+}

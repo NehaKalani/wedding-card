@@ -1,0 +1,242 @@
+.maayra {
+  --roll: 0;
+  --title: 0;
+  position: relative;
+  height: var(--app-h);
+  min-height: min(560px, var(--app-h));
+  overflow: hidden;
+  isolation: isolate;
+  background: #c43b42;
+}
+
+.maayra img {
+  max-width: none;
+}
+
+.maayra__drape {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.maayra.is-rolling .maayra__drape,
+.maayra.is-draped .maayra__drape {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  z-index: 8;
+  height: calc(var(--roll) * var(--app-h));
+  overflow: visible;
+}
+
+.maayra.is-draped .maayra__drape {
+  height: var(--app-h);
+}
+
+.maayra__cloth {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.maayra__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: var(--app-h);
+  object-fit: cover;
+  object-position: 62% 38%;
+}
+
+.maayra__frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: var(--app-h);
+}
+
+.maayra__yellow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: auto;
+  height: var(--yellow-h, min(calc(var(--app-h) * 0.92), calc(100vw * 654 / 408)));
+  transform: translate(-50%, -50%);
+}
+
+.maayra__crop {
+  position: absolute;
+  display: block;
+  height: auto;
+}
+
+.maayra__crop--tl {
+  top: -2%;
+  left: -8%;
+  z-index: 3;
+  width: 54vw;
+  clip-path: inset(0 32% 6% 0);
+}
+
+.maayra__crop--tr {
+  top: -3%;
+  right: -6%;
+  z-index: 3;
+  width: 48vw;
+}
+
+.maayra__crop--bl {
+  top: auto;
+  bottom: -3%;
+  left: -10%;
+  z-index: 3;
+  width: 50vw;
+  transform: scaleY(-1);
+  clip-path: inset(0 32% 6% 0);
+}
+
+.maayra__crop--br {
+  top: auto;
+  bottom: -1%;
+  right: -4%;
+  z-index: 3;
+  width: 52vw;
+  transform: scaleY(-1);
+}
+
+.maayra__hem {
+  display: none;
+  position: absolute;
+  left: -6%;
+  right: -6%;
+  top: 100%;
+  z-index: 6;
+  height: 36px;
+  transform: translateY(-45%);
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 228, 176, 0.55) 0%,
+      #e8a15a 18%,
+      #b43c3a 42%,
+      #7a1a28 68%,
+      #c45a4a 100%
+    );
+  box-shadow:
+    0 14px 28px rgba(60, 8, 18, 0.42),
+    inset 0 3px 5px rgba(255, 236, 196, 0.4),
+    inset 0 -4px 6px rgba(70, 8, 16, 0.35);
+}
+
+.maayra.is-rolling .maayra__hem {
+  display: block;
+}
+
+.maayra.is-draped .maayra__hem {
+  display: none;
+}
+
+.maayra__copy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: var(--app-h);
+  pointer-events: none;
+}
+
+.maayra__panel-ink {
+  position: absolute;
+  top: calc(var(--app-h) * 0.21);
+  right: 20vw;
+  bottom: calc(var(--app-h) * 0.22);
+  left: 20vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #6b1c22;
+}
+
+.maayra__title {
+  margin: 0;
+  max-width: 100%;
+  opacity: var(--title);
+  font-family: "Pinyon Script", "Snell Roundhand", cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(4.2rem, 20vw, 6.2rem);
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  font-synthesis: none;
+}
+
+.maayra__mid {
+  margin: auto 0;
+  text-align: center;
+}
+
+.maayra__date {
+  margin: 0;
+  font-family: Cinzel, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 4.6vw, 1.45rem);
+  letter-spacing: 0.1em;
+  text-transform: none;
+}
+
+.maayra__details {
+  margin-top: 0.55em;
+  font-size: clamp(1.2rem, 4.8vw, 1.5rem);
+  color: #6b1c22;
+}
+
+.maayra__hosts {
+  margin: 0;
+  padding-top: 0;
+  font-family: Cinzel, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(0.72rem, 2.8vw, 0.9rem);
+  letter-spacing: 0.055em;
+  line-height: 1.4;
+}
+
+.maayra__hosts p {
+  margin: 0;
+}
+
+.maayra__hosts-label {
+  margin-bottom: 0.45em;
+  font-weight: 700;
+  font-size: 1.08em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maayra {
+    --roll: 1;
+    --title: 1;
+  }
+
+  .maayra.is-rolling .maayra__drape,
+  .maayra.is-draped .maayra__drape {
+    position: absolute;
+    height: 100%;
+  }
+
+  .maayra__hem {
+    display: none;
+  }
+}

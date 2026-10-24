@@ -1,0 +1,1 @@
+These SVG files embed transparent PNG crops from the supplied asset-sheet illustration. They are independently movable, but are not editable vector paths. Fine edges are approximate; artwork was reconstructed from a white-background contact sheet.

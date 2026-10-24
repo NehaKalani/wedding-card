@@ -171,7 +171,7 @@ export async function initVenue(section) {
     frameArt(stage, art, { width: 941, height: 1672 });
   }
 
-  const WEDDING = new Date("2027-01-30T00:00:00+05:30");
+  const WEDDING = new Date("2026-01-01T00:00:00+05:30");
 
   function countdownParts(from, to) {
     if (to <= from) return { months: 0, days: 0, hours: 0, secs: 0 };

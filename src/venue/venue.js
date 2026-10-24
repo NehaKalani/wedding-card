@@ -171,7 +171,7 @@ export async function initVenue(section) {
     frameArt(stage, art, { width: 941, height: 1672 });
   }
 
-  const WEDDING = new Date("2026-01-01T00:00:00+05:30");
+  const WEDDING = new Date("2026-10-30T00:00:00+05:30");
 
   function countdownParts(from, to) {
     if (to <= from) return { months: 0, days: 0, hours: 0, secs: 0 };
@@ -200,12 +200,26 @@ export async function initVenue(section) {
       hours: t(parts.hours === 1 ? "hr" : "hrs"),
       secs: t("sec"),
     };
-    for (const [unit, value] of Object.entries(parts)) {
+    const order = ["months", "days", "hours", "secs"];
+    let higherShown = false;
+    for (const unit of order) {
+      const value = parts[unit];
       const el = section.querySelector(`[data-unit="${unit}"]`);
-      if (el) el.textContent = unit === "months" || unit === "days" ? String(value) : String(value).padStart(2, "0");
+      if (el) {
+        el.textContent = unit === "months" || unit === "days" ? String(value) : String(value).padStart(2, "0");
+        const cell = el.closest("span");
+        // Hide only leading zeros; once a higher unit shows, keep finer units (e.g. 5d 0h 0s).
+        if (cell) cell.hidden = value === 0 && !higherShown;
+      }
       const label = section.querySelector(`[data-label="${unit}"]`);
       if (label) label.textContent = labels[unit];
+      if (value !== 0) higherShown = true;
     }
+    const anyLeft = Object.values(parts).some((value) => value > 0);
+    const timer = section.querySelector(".venue__timer");
+    const until = section.querySelector(".venue__until");
+    if (timer) timer.hidden = !anyLeft;
+    if (until) until.hidden = !anyLeft;
   }
 
   const [layout, gold] = await Promise.all([
